@@ -1,0 +1,94 @@
+.manage-clinic-container {
+    padding: 0 100px;
+
+    .ms-title {
+        text-align    : center;
+        margin        : 30px 0;
+        text-transform: uppercase;
+        color         : blue;
+        font-size     : 20px;
+        font-weight   : 600;
+    }
+
+    .add-new-clinic {
+        .btn-clinic {
+            margin-top: 20px;
+        }
+    }
+
+    .all-clinic {
+        margin-bottom: 50px;
+
+        .c-title {
+            text-align    : center;
+            margin        : 30px 0;
+            text-transform: uppercase;
+            color         : blue;
+            font-size     : 20px;
+            font-weight   : 600;
+        }
+
+        .manage-clinic {
+            #table-mp {
+                font-family    : Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width          : 100%;
+            }
+
+            #table-mp td,
+            #table-mp th {
+                border : 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #table-mp tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #table-mp tr:hover {
+                background-color: #ddd;
+            }
+
+            #table-mp th {
+                padding-top     : 12px;
+                padding-bottom  : 12px;
+                text-align      : left;
+                background-color: #04AA6D;
+                color           : white;
+            }
+
+            .mp-btn-confirm {
+                border       : none;
+                outline      : none;
+                border-radius: 4px;
+                margin-right : 10px;
+                min-height   : 30px;
+                background   : orange;
+            }
+
+            .btn-edit {
+                width     : 50px;
+                border    : none;
+                outline   : none;
+                background: transparent;
+                color     : rgb(255, 136, 0);
+            }
+
+            .btn-delete {
+                width     : 50px;
+                border    : none;
+                outline   : none;
+                background: transparent;
+                color     : rgb(255, 0, 0);
+            }
+
+            .img {
+                width              : 100px;
+                height             : 100px;
+                background-size    : cover;
+                background-repeat  : no-repeat;
+                background-position: center;
+            }
+        }
+    }
+}

@@ -1,0 +1,89 @@
+// footer{
+//     background-color: #dddddd93;
+//     font-size: 14px;
+//     line-height: 21px;
+//     padding: 30px 0px;
+//     overflow: hidden;
+//     display: flex;
+//     justify-content: space-around;
+
+//     .left-content {
+//         width: 30%;
+
+//         .logo-footer {
+
+//             img {
+//                 width: 50%;
+//                 height: 40%;
+//             }
+//         }
+//     }
+
+//     .center-content{
+//         width: 30%;
+//     }
+    
+//     .right-content{
+//         width: 30%;
+//     }
+// }
+
+.footer {
+    background-color: #dfdfdf;
+    color: white;
+    height: fit-content;
+
+    .footer-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    .logo {
+        width: 40%;
+        margin-top: -30px;
+    }
+    .logo img {
+        width: 50%;
+        height: 100%;
+    }
+        .about {
+            text-align: left;
+            padding: 30px;
+            width: 40%;
+            color: black;
+            margin-left: 60px;
+        }
+
+        
+        .about ul li p {
+            text-align: left;
+        }
+
+        .listCourse {
+            margin: 50px;
+            padding-right: 130px;
+        }
+
+        .listCourse img {
+            width: 60px;
+            margin: 10px;
+        }
+
+        .descripsion {
+            text-align: center;
+            padding: 5px;
+            color: black;
+        }
+
+        .listCourse {
+            text-align: center;
+        }
+
+        .descripsion p {
+            text-align: center;
+            font-size: 13px;
+        }
+    
+}

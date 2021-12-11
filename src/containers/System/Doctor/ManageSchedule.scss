@@ -1,0 +1,90 @@
+.manage-schedule-container {
+    .m-s-title {
+        text-transform: uppercase;
+        margin-top    : 15px;
+        margin-bottom : 15px;
+        font-weight   : 600;
+        font-size     : 17px;
+        text-align    : center;
+    }
+
+    .pick-hour-container {
+        padding-top   : 20px;
+        padding-bottom: 20px;
+        display       : flex;
+        gap           : 20px;
+        flex-wrap     : wrap;
+
+        button {
+            padding: 6px 18px;
+            border : 1px solid gray;
+        }
+    }
+
+    .btn-schedule {
+        &.active {
+            background-color: orange;
+        }
+    }
+
+    .btn-save-schedule {
+        margin-top: 20px;
+    }
+
+
+    .s-title {
+        text-transform: uppercase;
+        margin-top    : 15px;
+        margin-bottom : 15px;
+        font-weight   : 600;
+        font-size     : 18px;
+        text-align    : center;
+    }
+
+    .manage-schedule {
+        #table-mp {
+            font-family    : Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width          : 100%;
+        }
+
+        #table-mp td,
+        #table-mp th {
+            border : 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #table-mp tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #table-mp tr:hover {
+            background-color: #ddd;
+        }
+
+        #table-mp th {
+            padding-top     : 12px;
+            padding-bottom  : 12px;
+            text-align      : left;
+            background-color: #04AA6D;
+            color           : white;
+        }
+
+        .mp-btn-confirm {
+            border       : none;
+            outline      : none;
+            border-radius: 4px;
+            margin-right : 10px;
+            min-height   : 30px;
+            background   : orange;
+        }
+
+        .btn-delete {
+            width     : 50px;
+            border    : none;
+            outline   : none;
+            background: transparent;
+            color     : rgb(255, 0, 0);
+        }
+    }
+}

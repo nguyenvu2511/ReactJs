@@ -1,0 +1,151 @@
+{
+    "homeheader": {
+        "speciality": "Medical specialty",
+        "searchdoctor": "Find a doctor by specialty",
+        "healthfacility": "Health facilities",
+        "selectroom": "Choose hospital, clinic",
+        "doctor": "Doctor",
+        "selectdoctor": "Choose a good doctor",
+        "fee": "Checkup package",
+        "checkhealth": "General health check",
+        "support": "Managerment GoodCare",
+        "welcome": "Welcome, "
+    },
+    "banner": {
+        "title1": "MEDICAL PLATFORM",
+        "title2": "COMPREHENSIVE HEALTH CARE",
+        "child1": "Specialized examination",
+        "child2": "Remote examination",
+        "child3": "General examination",
+        "child4": "Medical test",
+        "child5": "Mental health",
+        "child6": "Dental examination"
+    },
+    "menu": {
+        "admin": {
+            "manage-user": "Users System",
+            "manage-doctor": "Manage Doctors",
+            "manage-admin": "Manage Admins",
+            "crud": "Manage All Users",
+            "crud-redux": "Manage Accounts",
+            "clinic": "Clinics",
+            "manage-clinic": "Manage Clinics",
+            "specialty": "Specialties",
+            "manage-specialty": "Manage Specialties",
+            "handbook": "Handbook",
+            "manage-handbook": "Manage Handbook"
+        },
+        "doctor": {
+            "manage-schedule": "Manage Schedule",
+            "manage-patient": "Manage Patients"
+        }
+    },
+    "manage-user": {
+        "title": "Manage User",
+        "add": "Add a new user",
+        "email": "Email",
+        "password": "Password",
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "phone": "Phone Number",
+        "address": "Address",
+        "gender": "Gender",
+        "position": "Position",
+        "role": "Role",
+        "image": "Avatar",
+        "save": "Save user",
+        "edit": "Edit User",
+        "action": "Actions",
+        "img": "Avatar"
+    },
+    "homepage": {
+        "outstanding-doctor": "Outstanding Doctors",
+        "more-info": "More Info",
+        "specialty-popular": "Popular specialties",
+        "view-all": "More Info",
+        "clinic-popular": "Popular Clinics",
+        "view-clinic": "More Info",
+        "handbook": "Handbook",
+        "view-handbook": "More Info",
+        "datacovid": "Data Covid-19 of Vietnam",
+        "day": "Days",
+        "confirm": "Actived",
+        "active": "Confirmed",
+        "death": "Deaths",
+        "recover": "Recovered"
+    },
+    "manage-schedule": {
+        "title": "Manage Schedule",
+        "choose-doctor": "Choose Doctor...",
+        "choose-date": "Choose Date...",
+        "save": "Save Schedule"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Schedule",
+            "no-schedule": "The Doctor doesn't have an appointment during this time !",
+            "choose": "Choose ",
+            "book-free": " and booking (free)"
+        },
+        "extra-info-doctor": {
+            "text-address": "Address of Examination",
+            "price": "Examination price: ",
+            "detail": "See details",
+            "payment": "The patient can pay the cost in the form of: ",
+            "hide-price": "Hide price list"
+        },
+        "booking-modal": {
+            "title": "Infomation to book a medical appointment",
+            "fullname": "Fullname",
+            "phonenumber": "Phone number",
+            "email": "Email",
+            "address": "Address",
+            "reason": "Disease symptoms",
+            "birthday": "Date of birth",
+            "gender": "Genders",
+            "confirm": "Confirm",
+            "cancel": "Cancel",
+            "priceBooking": "Free Booking",
+            "price": "Price: "
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Infomation Doctors",
+            "select-doctor": "Choose Doctor...",
+            "intro": "Introduction of Doctor",
+            "add": "Create Info Doctor",
+            "save": "Save Info Doctor",
+            "price": "Price",
+            "payment": "Payment",
+            "province": "Province",
+            "nameClinic": "Clinic's name",
+            "addressClinic": "Clinic's address",
+            "note": "Note",
+            "specialty": "Choose Specialty...",
+            "select-clinic": "Choose Clinic..."
+        },
+        "manage-clinic": {
+            "title": "Infomation Clinics",
+            "nameclinic": "Clinic's name",
+            "pictureclinic": "Clinic's picture",
+            "addressclinic": "Clinic's address",
+            "save": "Save Info Clinic",
+            "add": "Add New Clinic"
+        },
+        "manage-specialty": {
+            "title": "Infomation Specialties",
+            "namespecialty": "Specialty's name",
+            "picturespecialty": "Specialty's picture",
+            "savespecialty": "Save Info Specialty",
+            "addspecialty": "Add New Specialty "
+        },
+        "manage-handbook": {
+            "title": "Infomation Handbooks",
+            "namehandbook": "Handbook's name",
+            "picturehandbook": "Handbook's picture",
+            "savehandbook": "Save Info Handbook",
+            "addhandbook": "Add new handbook"
+        }
+    }
+}

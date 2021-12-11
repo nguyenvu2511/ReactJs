@@ -1,0 +1,103 @@
+.manage-handbook-container {
+    padding: 0 100px;
+
+    .ms-title {
+        text-align    : center;
+        margin        : 30px 0;
+        text-transform: uppercase;
+        color         : blue;
+        font-size     : 20px;
+        font-weight   : 600;
+    }
+
+    .add-new-handbook {
+        .btn-save-handbook {
+            border       : none;
+            background   : orange;
+            padding      : 8px 5px;
+            min-width    : 75px;
+            border-radius: 3px;
+            margin       : 15px 0;
+        }
+
+        .btn-handbook {
+            margin-top: 20px;
+        }
+    }
+
+    .all-handbook {
+        margin-bottom: 50px;
+
+        .c-title {
+            text-align    : center;
+            margin        : 30px 0;
+            text-transform: uppercase;
+            color         : blue;
+            font-size     : 20px;
+            font-weight   : 600;
+        }
+
+        .manage-handbook {
+            #table-mp {
+                font-family    : Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width          : 100%;
+            }
+
+            #table-mp td,
+            #table-mp th {
+                border : 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #table-mp tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #table-mp tr:hover {
+                background-color: #ddd;
+            }
+
+            #table-mp th {
+                padding-top     : 12px;
+                padding-bottom  : 12px;
+                text-align      : left;
+                background-color: #04AA6D;
+                color           : white;
+            }
+
+            .mp-btn-confirm {
+                border       : none;
+                outline      : none;
+                border-radius: 4px;
+                margin-right : 10px;
+                min-height   : 30px;
+                background   : orange;
+            }
+
+            .btn-edit {
+                width     : 50px;
+                border    : none;
+                outline   : none;
+                background: transparent;
+                color     : rgb(255, 136, 0);
+            }
+
+            .btn-delete {
+                width     : 50px;
+                border    : none;
+                outline   : none;
+                background: transparent;
+                color     : rgb(255, 0, 0);
+            }
+
+            .image {
+                background-size    : cover !important;
+                background-repeat  : no-repeat !important;
+                background-position: center !important;
+                width              : 100px;
+                height             : 100px;
+            }
+        }
+    }
+}
