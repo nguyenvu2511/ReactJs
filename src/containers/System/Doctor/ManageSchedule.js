@@ -4,7 +4,7 @@ import './ManageSchedule.scss';
 import { FormattedMessage } from 'react-intl';
 import Select from 'react-select';
 import * as actions from "../../../store/actions"
-import { LANGUAGES, dateFormat } from '../../../utils';
+import { LANGUAGES, dateFormat, USER_ROLE } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
 import { toast } from 'react-toastify';
@@ -20,11 +20,29 @@ class ManageSchedule extends Component {
             currentDate: '',
             rangeTime: [],
             allAvalableTime: [],
+            isOpenSelect: false
         }
     }
 
     componentDidMount() {
-        this.props.fetchAllDoctors();
+        let { userInfo } = this.props;
+
+        if (userInfo && !_.isEmpty(userInfo)) {
+            let role = userInfo.roleId;
+            if (role === USER_ROLE.ADMIN) {
+                this.props.fetchAllDoctors();
+                this.setState({
+                    isOpenSelect: true
+                })
+            }
+            if (role === USER_ROLE.DOCTOR) {
+                this.setState({
+                    isOpenSelect: false
+                })
+            }
+        }
+
+
         this.props.fetchAllScheduleTime();
     }
 
@@ -83,13 +101,30 @@ class ManageSchedule extends Component {
         });
     }
     getDataSchedule = async () => {
-        let FormatedDate = new Date(this.state.currentDate).getTime();
-        let res = await getScheduleDoctorByDate(this.state.selectedDoctor.value, FormatedDate);
-        if (res && res.errCode === 0) {
-            this.setState({
-                allAvalableTime: res.data
-            })
+        let { userInfo } = this.props;
+
+        if (userInfo && !_.isEmpty(userInfo)) {
+            let role = userInfo.roleId;
+            if (role === USER_ROLE.ADMIN) {
+                let FormatedDate = new Date(this.state.currentDate).getTime();
+                let res = await getScheduleDoctorByDate(this.state.selectedDoctor.value, FormatedDate);
+                if (res && res.errCode === 0) {
+                    this.setState({
+                        allAvalableTime: res.data
+                    })
+                }
+            }
+            if (role === USER_ROLE.DOCTOR) {
+                let FormatedDate = new Date(this.state.currentDate).getTime();
+                let res = await getScheduleDoctorByDate(userInfo.id, FormatedDate);
+                if (res && res.errCode === 0) {
+                    this.setState({
+                        allAvalableTime: res.data
+                    })
+                }
+            }
         }
+
 
     }
 
@@ -123,43 +158,76 @@ class ManageSchedule extends Component {
             toast.error("Chưa chọn ngày hoặc sai định dạng ngày!");
             return;
         }
-        if (selectedDoctor && _.isEmpty(selectedDoctor)) {
-            toast.error("Chưa chọn bác sĩ!");
-            return;
-        }
+        let { userInfo } = this.props;
 
-        // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        if (userInfo && !_.isEmpty(userInfo)) {
+            let role = userInfo.roleId;
+            if (role === USER_ROLE.ADMIN) {
+                if (selectedDoctor && _.isEmpty(selectedDoctor)) {
+                    toast.error("Chưa chọn bác sĩ!");
+                    return;
+                }
+                let formatedDate = new Date(currentDate).getTime();
 
-        // let formatedDate = moment(currentDate).unix();
-        let formatedDate = new Date(currentDate).getTime();
+                if (rangeTime && rangeTime.length > 0) {
+                    let selectedTime = rangeTime.filter(item => item.isSelected === true);
+                    if (selectedTime && selectedTime.length > 0) {
+                        selectedTime.map(schedule => {
+                            let object = {};
+                            object.doctorId = selectedDoctor.value;
+                            object.date = formatedDate;
+                            object.timeType = schedule.keyMap;
+                            result.push(object)
+                        })
 
-        if (rangeTime && rangeTime.length > 0) {
-            let selectedTime = rangeTime.filter(item => item.isSelected === true);
-            if (selectedTime && selectedTime.length > 0) {
-                selectedTime.map(schedule => {
-                    let object = {};
-                    object.doctorId = selectedDoctor.value;
-                    object.date = formatedDate;
-                    object.timeType = schedule.keyMap;
-                    result.push(object)
+                    } else {
+                        toast.error("Chưa chọn thời gian!")
+                    }
+                }
+
+                let res = await saveBulkScheduleDoctor({
+                    arrSchedule: result,
+                    doctorId: selectedDoctor.value,
+                    formatedDate: formatedDate
                 })
-
-            } else {
-                toast.error("Chưa chọn thời gian!")
+                if (res && res.errCode === 0) {
+                    toast.success("Lưu thành công!");
+                    await this.getDataSchedule();
+                } else {
+                    toast.error("Không thể lưu lịch hẹn !");
+                }
             }
-        }
+            if (role === USER_ROLE.DOCTOR) {
+                let formatedDate = new Date(currentDate).getTime();
 
-        let res = await saveBulkScheduleDoctor({
-            arrSchedule: result,
-            doctorId: selectedDoctor.value,
-            formatedDate: formatedDate
-        })
+                if (rangeTime && rangeTime.length > 0) {
+                    let selectedTime = rangeTime.filter(item => item.isSelected === true);
+                    if (selectedTime && selectedTime.length > 0) {
+                        selectedTime.map(schedule => {
+                            let object = {};
+                            object.doctorId = userInfo.id;
+                            object.date = formatedDate;
+                            object.timeType = schedule.keyMap;
+                            result.push(object)
+                        })
 
-        if (res && res.errCode === 0) {
-            toast.success("Lưu thành công!");
-            await this.getDataSchedule();
-        } else {
-            toast.error("Không thể lưu lịch hẹn !");
+                    } else {
+                        toast.error("Chưa chọn thời gian!")
+                    }
+                }
+
+                let res = await saveBulkScheduleDoctor({
+                    arrSchedule: result,
+                    doctorId: userInfo.id,
+                    formatedDate: formatedDate
+                })
+                if (res && res.errCode === 0) {
+                    toast.success("Lưu thành công!");
+                    await this.getDataSchedule();
+                } else {
+                    toast.error("Không thể lưu lịch hẹn !");
+                }
+            }
         }
     }
     handleBtnDelete = async (item) => {
@@ -180,7 +248,7 @@ class ManageSchedule extends Component {
     }
 
     render() {
-        let { rangeTime, allAvalableTime } = this.state;
+        let { rangeTime, allAvalableTime, isOpenSelect } = this.state;
         let { language } = this.props;
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         return (
@@ -190,14 +258,19 @@ class ManageSchedule extends Component {
                 </div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-6 form-group">
-                            <label><FormattedMessage id="manage-schedule.choose-doctor" /></label>
-                            <Select
-                                value={this.state.selectedDoctor}
-                                onChange={this.handleChangeSelect}
-                                options={this.state.listDoctors}
-                            />
-                        </div>
+                        {isOpenSelect && isOpenSelect === true ?
+                            <div className="col-6 form-group">
+                                <label><FormattedMessage id="manage-schedule.choose-doctor" /></label>
+                                <Select
+                                    value={this.state.selectedDoctor}
+                                    onChange={this.handleChangeSelect}
+                                    options={this.state.listDoctors}
+                                />
+                            </div>
+                            :
+                            <div></div>
+                        }
+
                         <div className="col-6 form-group">
                             <label><FormattedMessage id="manage-schedule.choose-date" /></label>
                             <DatePicker
@@ -282,6 +355,7 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        userInfo: state.user.userInfo,
         allDoctors: state.admin.allDoctors,
         allScheduleTime: state.admin.allScheduleTime,
     };
