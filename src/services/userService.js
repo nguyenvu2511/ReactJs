@@ -164,6 +164,10 @@ const editSpecialty = (data) => {
 const editHandbook = (data) => {
     return axios.post('/api/edit-handbook', data)
 }
+
+const getAllPatientDone = (data) => {
+    return axios.get(`/api/get-list-patient-done?doctorId=${data.doctorId}`)
+}
 export {
     handleLoginApi, getAllUsers,
     createNewUserService, deleteUserService,
@@ -179,5 +183,6 @@ export {
     getDataCovid, getAllPatientForDoctor, postSendRemedy,
     postSendCancelBooking, deleteScheduleByDate,
     deleteClinicById, deleteSpecialty,
-    deleteHandbook, editClinic, editSpecialty, editHandbook
+    deleteHandbook, editClinic, editSpecialty, editHandbook,
+    getAllPatientDone
 }
