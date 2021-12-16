@@ -3,10 +3,7 @@ export const adminMenu = [
         name: 'menu.admin.manage-user',
         menus: [
             {
-                name: 'menu.admin.crud', link: '/system/user-manage'
-            },
-            {
-                name: 'menu.admin.crud-redux', link: '/system/user-redux'
+                name: 'menu.admin.crud-redux', link: '/system/manage-user'
             },
 
             {
@@ -22,7 +19,7 @@ export const adminMenu = [
             // },
 
             { //quản lý lịch khám
-                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
+                name: 'menu.doctor.manage-schedule', link: '/system/manage-schedule'
             },
         ]
     },
