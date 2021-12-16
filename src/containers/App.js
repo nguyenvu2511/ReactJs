@@ -19,7 +19,10 @@ import VerifyEmail from './Patient/VerifyEmail';
 import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
 import DetailClinic from './Patient/Clinic/DetailClinic';
 import DetailHandbook from './Patient/Handbook/DetailHandbook';
-
+import ListSpecialty from './Patient/Specialty/ListSpecialty';
+import ListClinic from './Patient/Clinic/ListClinic';
+import ListDoctor from './Patient/Doctor/ListDoctor';
+import ListHanbook from './Patient/Handbook/ListHanbook';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -47,21 +50,25 @@ class App extends Component {
                     <div className="main-container">
                         <div className="content-container">
                             <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
-                            <Switch>
-                                <Route path={path.HOME} exact component={(Home)} />
-                                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)} />
-                                
-                                <Route path={path.HOMEPAGE} component={HomePage} />
-                                <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
-                                <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
-                                <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
-                                <Route path={path.DETAIL_HANDBOOK} component={DetailHandbook} />
+                                <Switch>
+                                    <Route path={path.HOME} exact component={(Home)} />
+                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)} />
 
-                                <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />    
-                                
-                            </Switch>
+                                    <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                                    <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
+                                    <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
+                                    <Route path={path.DETAIL_HANDBOOK} component={DetailHandbook} />
+
+                                    <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
+                                    <Route path={path.LIST_SPECIALTY} component={ListSpecialty} />
+                                    <Route path={path.LIST_CLINIC} component={ListClinic} />
+                                    <Route path={path.LIST_DOCTOR} component={ListDoctor} />
+                                    <Route path={path.LIST_HANDBOOK} component={ListHanbook} />
+
+                                </Switch>
                             </CustomScrollbars>
                         </div>
 

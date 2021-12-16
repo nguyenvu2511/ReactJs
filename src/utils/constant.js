@@ -9,13 +9,17 @@ export const path = {
     DETAIL_CLINIC: '/detail-clinic/:id',
     DETAIL_HANDBOOK: '/detail-handbook/:id',
     VERIFY_EMAIL_BOOKING: '/verify-booking',
+    LIST_SPECIALTY: '/list-specialty',
+    LIST_CLINIC: '/list-clinic',
+    LIST_DOCTOR: '/list-doctor',
+    LIST_HANDBOOK: '/list-handbook'
 };
 
 export const LANGUAGES = {
     VI: 'vi',
     EN: 'en'
 };
- 
+
 export const CRUD_ACTIONS = {
     CREATE: "CREATE",
     EDIT: "EDIT",

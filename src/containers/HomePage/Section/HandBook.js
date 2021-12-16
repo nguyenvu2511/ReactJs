@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import { getAllHandbook } from '../../../services/userService';
 import './HandBook.scss';
 import { withRouter } from 'react-router';
-
+import { Link } from 'react-router-dom';
 class HandBook extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +16,7 @@ class HandBook extends Component {
 
     async componentDidMount() {
         let res = await getAllHandbook();
-        if(res && res.errCode === 0){
+        if (res && res.errCode === 0) {
             this.setState({
                 dataHandbook: res.data,
             })
@@ -24,7 +24,7 @@ class HandBook extends Component {
     }
 
     handleViewDetailHandbook = (item) => {
-        if(this.props.history){
+        if (this.props.history) {
             this.props.history.push(`/detail-handbook/${item.id}`)
         }
     }
@@ -38,19 +38,19 @@ class HandBook extends Component {
                         <span className="title-section">
                             <FormattedMessage id="homepage.handbook" />
                         </span>
-                        <button className="btn-section"><FormattedMessage id="homepage.view-handbook" /></button>
+                        <button className="btn-section"><Link to={`/list-handbook`}><FormattedMessage id="homepage.view-handbook" /></Link></button>
                     </div>
                     <div className="section-body">
                         <Slider {...this.props.settings}>
                             {dataHandbook && dataHandbook.length > 0 &&
                                 dataHandbook.map((item, index) => {
                                     return (
-                                        <div 
-                                            className="section-custom handbook-child" 
+                                        <div
+                                            className="section-custom handbook-child"
                                             key={index}
                                             onClick={() => this.handleViewDetailHandbook(item)}
                                         >
-                                            <div 
+                                            <div
                                                 className="bg-image section-handbook"
                                                 style={{ backgroundImage: `url(${item.image})` }}
                                             ></div>

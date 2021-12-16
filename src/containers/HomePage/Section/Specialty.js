@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import { getAllSpecialty } from '../../../services/userService';
 import { withRouter } from 'react-router';
-
+import { Link } from 'react-router-dom';
 class Specialty extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +16,7 @@ class Specialty extends Component {
 
     async componentDidMount() {
         let res = await getAllSpecialty();
-        if(res && res.errCode === 0) {
+        if (res && res.errCode === 0) {
             this.setState({
                 dataSpecialty: res.data ? res.data : [],
             })
@@ -24,7 +24,7 @@ class Specialty extends Component {
     }
 
     handleViewDetailSpecialty = (item) => {
-        if(this.props.history){
+        if (this.props.history) {
             this.props.history.push(`/detail-specialty/${item.id}`)
         }
     }
@@ -36,26 +36,26 @@ class Specialty extends Component {
                 <div className="section-container">
                     <div className="section-header">
                         <span className="title-section">
-                            <FormattedMessage id="homepage.specialty-popular"/>
+                            <FormattedMessage id="homepage.specialty-popular" />
                         </span>
                         <button className="btn-section">
-                            <FormattedMessage id="homepage.view-all"/>
+                            <Link to={`/list-specialty`}>  <FormattedMessage id="homepage.view-all" /></Link>
                         </button>
                     </div>
                     <div className="section-body">
                         <Slider {...this.props.settings}>
                             {dataSpecialty && dataSpecialty.length > 0 &&
                                 dataSpecialty.map((item, index) => {
-                                    return(
-                                        <div 
-                                            className="section-custom specialty-child" 
+                                    return (
+                                        <div
+                                            className="section-custom specialty-child"
                                             key={index}
                                             onClick={() => this.handleViewDetailSpecialty(item)}
                                         >
-                                            <div 
+                                            <div
                                                 className="bg-image section-specialty"
-                                                style={{ backgroundImage: `url(${item.image})`}}
-                                                >
+                                                style={{ backgroundImage: `url(${item.image})` }}
+                                            >
                                             </div>
                                             <div className="specialty-name">{item.name}</div>
                                         </div>

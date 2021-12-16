@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import { getAllClinic } from '../../../services/userService';
 import { withRouter } from 'react-router';
-
+import { Link } from 'react-router-dom';
 class MedicalFacility extends Component {
 
     constructor(props) {
@@ -17,7 +17,7 @@ class MedicalFacility extends Component {
 
     async componentDidMount() {
         let res = await getAllClinic();
-        if(res && res.errCode === 0) {
+        if (res && res.errCode === 0) {
             this.setState({
                 dataClinics: res.data ? res.data : [],
             })
@@ -25,7 +25,7 @@ class MedicalFacility extends Component {
     }
 
     handleViewDetailClinic = (clinic) => {
-        if(this.props.history){
+        if (this.props.history) {
             this.props.history.push(`/detail-clinic/${clinic.id}`)
         }
     }
@@ -40,20 +40,20 @@ class MedicalFacility extends Component {
                             <FormattedMessage id="homepage.clinic-popular" />
                         </span>
                         <button className="btn-section">
-                            <FormattedMessage id="homepage.view-clinic" />
+                            <Link to={`/list-clinic`}> <FormattedMessage id="homepage.view-clinic" /></Link>
                         </button>
                     </div>
                     <div className="section-body">
                         <Slider {...this.props.settings}>
                             {dataClinics && dataClinics.length > 0 &&
                                 dataClinics.map((item, index) => {
-                                    return(
-                                        <div className="section-custom clinic-child" 
+                                    return (
+                                        <div className="section-custom clinic-child"
                                             key={index}
                                             onClick={() => this.handleViewDetailClinic(item)}
                                         >
                                             <div className="bg-image section-medical-facility"
-                                                style={{ backgroundImage: `url(${item.image})`}}
+                                                style={{ backgroundImage: `url(${item.image})` }}
                                             ></div>
                                             <div className="clinic-name">{item.name}</div>
                                         </div>

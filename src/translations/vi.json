@@ -6,8 +6,8 @@
         "selectroom": "Chọn bệnh viện, phòng khám",
         "doctor": "Bác sĩ",
         "selectdoctor": "Chọn bác sĩ giỏi",
-        "fee": "Gói khám",
-        "checkhealth": "Khám sức khỏe tổng quát",
+        "handbook": "Cẩm nang",
+        "searchhanbook": "Xem cẩm nang y tế",
         "support": "Đăng nhập quản trị GoodCare",
         "welcome": "Xin chào, "
     },
@@ -82,6 +82,12 @@
         "save": "Lưu Lịch hẹn"
     },
     "patient": {
+        "list": {
+            "list-specialty": "Danh sách chuyên khoa",
+            "list-clinic": "Danh sách bệnh viện, phòng khám",
+            "list-doctor": "Danh sách bác sỹ ",
+            "list-handbook": "Danh sách cẩm nang"
+        },
         "detail-doctor": {
             "schedule": "Lịch khám",
             "no-schedule": "Bác sĩ không có lịch hẹn trong thời gian này !",

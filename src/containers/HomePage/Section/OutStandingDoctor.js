@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import { withRouter } from 'react-router';
-
+import { Link } from 'react-router-dom';
 class OutStandingDoctor extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +15,7 @@ class OutStandingDoctor extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.topDoctorsRedux !== this.props.topDoctorsRedux){
+        if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
             this.setState({
                 arrDoctors: this.props.topDoctorsRedux
             })
@@ -27,7 +27,7 @@ class OutStandingDoctor extends Component {
     }
 
     handleViewDetailDoctor = (doctor) => {
-        if(this.props.history){
+        if (this.props.history) {
             this.props.history.push(`/detail-doctor/${doctor.id}`)
         }
     }
@@ -44,37 +44,37 @@ class OutStandingDoctor extends Component {
                             <FormattedMessage id="homepage.outstanding-doctor" />
                         </span>
                         <button className="btn-section">
-                            <FormattedMessage id="homepage.more-info" />
+                            <Link to={`/list-doctor`}> <FormattedMessage id="homepage.more-info" /></Link>
                         </button>
                     </div>
                     <div className="section-body">
                         <Slider {...this.props.settings}>
-                            
-                            {arrDoctors && arrDoctors.length > 0 
-                            && arrDoctors.map((item, index) => {
-                                let imageBase64 = '';
-                                if(item.image){
-                                    imageBase64 = Buffer.from(item.image, 'base64').toString('binary');
-                                }
-                                let nameVI = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`;
-                                let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
-                                return(
-                                    <div className="section-custom" key={index} onClick={() => this.handleViewDetailDoctor(item)}>
-                                        <div className="custom-border">
-                                            <div className="outer-bg">
-                                                <div className="bg-image section-outstanding-doctor"
-                                                    style={{ backgroundImage: `url(${imageBase64})`}}
-                                                ></div>
-                                            </div>
-                                            <div className="position text-center">
-                                                <div>{language === LANGUAGES.VI ? nameVI : nameEn}</div>
-                                                <div>Bác sĩ GoodCare</div>
+
+                            {arrDoctors && arrDoctors.length > 0
+                                && arrDoctors.map((item, index) => {
+                                    let imageBase64 = '';
+                                    if (item.image) {
+                                        imageBase64 = Buffer.from(item.image, 'base64').toString('binary');
+                                    }
+                                    let nameVI = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`;
+                                    let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
+                                    return (
+                                        <div className="section-custom" key={index} onClick={() => this.handleViewDetailDoctor(item)}>
+                                            <div className="custom-border">
+                                                <div className="outer-bg">
+                                                    <div className="bg-image section-outstanding-doctor"
+                                                        style={{ backgroundImage: `url(${imageBase64})` }}
+                                                    ></div>
+                                                </div>
+                                                <div className="position text-center">
+                                                    <div>{language === LANGUAGES.VI ? nameVI : nameEn}</div>
+                                                    <div>{item.Doctor_Info.specialtyData.name}</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                            
+                                    )
+                                })
+
                             }
                         </Slider>
                     </div>

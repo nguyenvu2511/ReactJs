@@ -6,8 +6,8 @@
         "selectroom": "Choose hospital, clinic",
         "doctor": "Doctor",
         "selectdoctor": "Choose a good doctor",
-        "fee": "Checkup package",
-        "checkhealth": "General health check",
+        "handbook": "Handbook",
+        "searchhanbook": "View medical handbook",
         "support": "Managerment GoodCare",
         "welcome": "Welcome, "
     },
@@ -82,6 +82,12 @@
         "save": "Save Schedule"
     },
     "patient": {
+        "list": {
+            "list-specialty": "List specialty",
+            "list-clinic": "List clinic",
+            "list-doctor": "List doctor",
+            "list-handbook": "List handbook"
+        },
         "detail-doctor": {
             "schedule": "Schedule",
             "no-schedule": "The Doctor doesn't have an appointment during this time !",
