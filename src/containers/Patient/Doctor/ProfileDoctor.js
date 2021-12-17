@@ -14,7 +14,7 @@ class ProfileDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           dataProfile: {},
+            dataProfile: {},
         }
     }
 
@@ -27,21 +27,24 @@ class ProfileDoctor extends Component {
 
     getInfoDoctor = async (id) => {
         let result = {};
-        if(id){
+        if (id) {
             let res = await getProfileDoctorById(id);
-            if(res && res.errCode === 0){
+            if (res && res.errCode === 0) {
                 result = res.data;
             }
         }
         return result;
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot){
-        if(this.props.language !== prevProps.language){
-            
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.language !== prevProps.language) {
+
         }
-        if(this.props.doctorId !== prevProps.doctorId){
-            // this.getInfoDoctor(this.props.doctorId);
+        if (this.props.doctorId !== prevProps.doctorId) {
+            let data = await this.getInfoDoctor(this.props.doctorId)
+            this.setState({
+                dataProfile: data
+            })
         }
     }
 
@@ -51,14 +54,14 @@ class ProfileDoctor extends Component {
 
     renderTimeBooking = (dataTime) => {
         let { language } = this.props;
-        if(dataTime && !_.isEmpty(dataTime)){
-            let time = language === LANGUAGES.VI ? 
+        if (dataTime && !_.isEmpty(dataTime)) {
+            let time = language === LANGUAGES.VI ?
                 dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn;
 
-            let date = language === LANGUAGES.VI ? 
-                    moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY')
+            let date = language === LANGUAGES.VI ?
+                moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY')
                 :
-                    moment.unix(+dataTime.date / 1000).locale('en').format('ddd - MM/DD/YYYY');
+                moment.unix(+dataTime.date / 1000).locale('en').format('ddd - MM/DD/YYYY');
             return (
                 <>
                     <div>{time} - {this.capitalizeFirstLetter(date)}</div>
@@ -68,75 +71,75 @@ class ProfileDoctor extends Component {
         }
         return <></>
     }
-    
+
     render() {
         let { dataProfile } = this.state;
-        let { language, isShowDescriptionDoctor, 
-            dataTime, isShowLinkDetail, 
+        let { language, isShowDescriptionDoctor,
+            dataTime, isShowLinkDetail,
             isShowPrice, doctorId } = this.props;
         let nameVI = '', nameEn = '';
-        if(dataProfile && dataProfile.positionData){
+        if (dataProfile && dataProfile.positionData) {
             nameVI = `${dataProfile.positionData.valueVi}, ${dataProfile.lastName} ${dataProfile.firstName}`;
             nameEn = `${dataProfile.positionData.valueEn}, ${dataProfile.firstName} ${dataProfile.lastName}`;
         }
         return (
             <div className="profile-doctor-container">
                 <div className="intro-doctor">
-                    <div className="content-left" 
+                    <div className="content-left"
                         style={{ backgroundImage: `url(${dataProfile && dataProfile.image ? dataProfile.image : ''})` }}
                     >
                     </div>
                     <div className="content-right">
-                         <div className="up">
+                        <div className="up">
                             {language === LANGUAGES.VI ? nameVI : nameEn}
                         </div>
                         <div className="down">
-                        {isShowDescriptionDoctor === true ?
-                            <>
-                                {dataProfile && dataProfile.Markdown && dataProfile.Markdown.description
-                                    && <span>
-                                        {dataProfile.Markdown.description}
-                                    </span>
-                                }
-                            </>
-                            :
-                            <>
-                                {this.renderTimeBooking(dataTime)}
-                            </>
-                        }
+                            {isShowDescriptionDoctor === true ?
+                                <>
+                                    {dataProfile && dataProfile.Markdown && dataProfile.Markdown.description
+                                        && <span>
+                                            {dataProfile.Markdown.description}
+                                        </span>
+                                    }
+                                </>
+                                :
+                                <>
+                                    {this.renderTimeBooking(dataTime)}
+                                </>
+                            }
                         </div>
                     </div>
-                    
+
                 </div>
-                { isShowLinkDetail === true && 
+                {isShowLinkDetail === true &&
                     <div className="view-detail-doctor">
                         <Link to={`/detail-doctor/${doctorId}`}>Xem thêm</Link>
-                    </div> 
+                    </div>
                 }
-                { isShowPrice === true &&
-                <div className="price">
-                    <FormattedMessage id="patient.booking-modal.price" />
-                        { dataProfile && dataProfile.Doctor_Info && language === LANGUAGES .VI &&
-                            <NumberFormat 
+                {isShowPrice === true &&
+                    <div className="price">
+                        <FormattedMessage id="patient.booking-modal.price" />
+                        {dataProfile && dataProfile.Doctor_Info && language === LANGUAGES.VI &&
+                            <NumberFormat
                                 className="currency"
-                                value={dataProfile.Doctor_Info.priceTypeData.valueVi} 
-                                displayType={'text'} 
-                                thousandSeparator={true} 
-                                suffix={'VNĐ'} 
+                                value={dataProfile.Doctor_Info.priceTypeData.valueVi}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'VNĐ'}
                             />
                         }
 
-                        { dataProfile && dataProfile.Doctor_Info && language === LANGUAGES .EN &&
-                            <NumberFormat 
+                        {dataProfile && dataProfile.Doctor_Info && language === LANGUAGES.EN &&
+                            <NumberFormat
                                 className="currency"
-                                value={dataProfile.Doctor_Info.priceTypeData.valueEn} 
-                                displayType={'text'} 
-                                thousandSeparator={true} 
-                                suffix={'USD'} 
+                                value={dataProfile.Doctor_Info.priceTypeData.valueEn}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'USD'}
                             />
                         }
-                </div>
-            }
+                    </div>
+                }
             </div>
         );
     }
