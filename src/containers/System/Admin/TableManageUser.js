@@ -67,7 +67,7 @@ class TableUseManage extends Component {
                                 <td>{item.phonenumber}</td>
                                 <td>{item.address}</td>
                                 <td>{language === LANGUAGES.VI ? item.roleData.valueVi : item.roleData.valueEn}</td>
-                                <td className={"img"} style={{ backgroundImage: `url(${item.image ? new Buffer(item.image, 'base_64').toString('binary') : ''})` }}></td>
+                                <td className={"img"} style={{ backgroundImage: `url(${item.image ? Buffer.from(item.image, 'base_64').toString('binary') : ''})` }}></td>
                                 <td>  <button className="btn-edit" onClick={() => { this.handleEditUser(item) }}><i className="fas fa-edit"></i></button>
                                     <button className="btn-delete" onClick={() => { this.handleDeleteUser(item) }}><i className="fas fa-trash-alt"></i></button>
                                 </td>

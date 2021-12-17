@@ -22,68 +22,71 @@
 //     .center-content{
 //         width: 30%;
 //     }
-    
+
 //     .right-content{
 //         width: 30%;
 //     }
 // }
 
 .footer {
+
     background-color: #dfdfdf;
-    color: white;
-    height: fit-content;
+    color           : white;
+    height          : fit-content;
 
     .footer-content {
-        display: flex;
-        align-items: center;
+        display        : flex;
+        align-items    : center;
         justify-content: space-around;
-        text-align: center;
+        text-align     : center;
     }
 
     .logo {
-        width: 40%;
+        width     : 40%;
         margin-top: -30px;
     }
+
     .logo img {
-        width: 50%;
+        width : 50%;
         height: 100%;
     }
-        .about {
-            text-align: left;
-            padding: 30px;
-            width: 40%;
-            color: black;
-            margin-left: 60px;
-        }
 
-        
-        .about ul li p {
-            text-align: left;
-        }
+    .about {
+        text-align : left;
+        padding    : 30px;
+        width      : 40%;
+        color      : black;
+        margin-left: 60px;
+    }
 
-        .listCourse {
-            margin: 50px;
-            padding-right: 130px;
-        }
 
-        .listCourse img {
-            width: 60px;
-            margin: 10px;
-        }
+    .about ul li p {
+        text-align: left;
+    }
 
-        .descripsion {
-            text-align: center;
-            padding: 5px;
-            color: black;
-        }
+    .listCourse {
+        margin       : 50px;
+        padding-right: 130px;
+    }
 
-        .listCourse {
-            text-align: center;
-        }
+    .listCourse img {
+        width : 60px;
+        margin: 10px;
+    }
 
-        .descripsion p {
-            text-align: center;
-            font-size: 13px;
-        }
-    
+    .descripsion {
+        text-align: center;
+        padding   : 5px;
+        color     : black;
+    }
+
+    .listCourse {
+        text-align: center;
+    }
+
+    .descripsion p {
+        text-align: center;
+        font-size : 13px;
+    }
+
 }
