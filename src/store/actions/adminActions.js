@@ -50,7 +50,7 @@ export const fetchPositionStart = () => {
             }
         } catch (e) {
             dispatch(fetchPositionFailed());
-            console.log('fetchPositionStart error', e)
+
         }
     }
 }

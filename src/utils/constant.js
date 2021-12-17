@@ -12,7 +12,8 @@ export const path = {
     LIST_SPECIALTY: '/list-specialty',
     LIST_CLINIC: '/list-clinic',
     LIST_DOCTOR: '/list-doctor',
-    LIST_HANDBOOK: '/list-handbook'
+    LIST_HANDBOOK: '/list-handbook',
+    SUPPORT: '/support'
 };
 
 export const LANGUAGES = {

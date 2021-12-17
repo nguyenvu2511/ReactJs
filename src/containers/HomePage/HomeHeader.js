@@ -48,12 +48,8 @@ class HomeHeader extends Component {
                             </div>
                         </div>
                         <div className="right-content">
-                            <div className="support">
-                                <a target="_blank" href="/login">
-                                    <i className="fas fa-sign-in-alt"></i>
-                                </a>
-                                <FormattedMessage id="homeheader.support" />
-                            </div>
+                            <Link to={`/support`}><div className="support"><i className="fas fa-question-circle"></i><span> <FormattedMessage id="homeheader.support" /></span></div></Link>
+
                             <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}><span onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span></div>
                             <div className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}><span onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span></div>
                         </div>
