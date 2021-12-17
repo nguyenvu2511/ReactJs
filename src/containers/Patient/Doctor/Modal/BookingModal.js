@@ -35,6 +35,14 @@ class BookingModal extends Component {
 
     async componentDidMount() {
         this.props.getGenders();
+        if (this.props.dataScheduleTime && !_.isEmpty(this.props.dataScheduleTime)) {
+            let doctorId = this.props.dataScheduleTime.doctorId;
+            let timeType = this.props.dataScheduleTime.timeType;
+            this.setState({
+                doctorId: doctorId,
+                timeType: timeType
+            })
+        }
 
     }
 
@@ -162,10 +170,10 @@ class BookingModal extends Component {
             this.props.closeModal();
         }
         if (res && res.errCode === 2) {
-            toast.success(`${res.errMessage}`)
+            toast.error(`${res.errMessage}`)
             this.props.closeModal();
         }
-        else {
+        if (res && res.errCode === 1) {
             toast.error('Đặt lịch thất bại! Vui lòng điền đầy đủ thông tin !')
         }
     }
@@ -173,10 +181,11 @@ class BookingModal extends Component {
     render() {
         // toggle={}
         let { isOpenModal, closeModal, dataScheduleTime } = this.props;
-        let doctorId = '';
-        if (dataScheduleTime && !_.isEmpty(dataScheduleTime)) {
-            doctorId = dataScheduleTime.doctorId;
-        }
+        // let doctorId = '';
+        // if (dataScheduleTime && !_.isEmpty(dataScheduleTime)) {
+        //     doctorId = dataScheduleTime.doctorId;
+        // }
+        let { doctorId } = this.state
         return (
             <LoadingOverlay
                 active={this.state.isShowLoading}
