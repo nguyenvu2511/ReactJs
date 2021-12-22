@@ -1,32 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+
+// import './LikeAndShare.scss';
 import { LANGUAGES } from '../../../utils';
-import { FormattedMessage } from 'react-intl';
-require('dotenv').config();
+
 
 class LikeAndShare extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-        
+
+
         }
     }
-
+    async componentDidMount() {
+        this.initFacebookSDK();
+    }
     initFacebookSDK() {
         if (window.FB) {
             window.FB.XFBML.parse();
         }
 
         let { language } = this.props;
-        let locale = language === LANGUAGES.VI ? 'vi_VN' : 'en_US';
+        let locale = language === LANGUAGES.VI ? 'vi_VN' : 'en_US'
         window.fbAsyncInit = function () {
             window.FB.init({
                 appId: process.env.REACT_APP_FACEBOOK_APP_ID,
-                autoLogAppEvents : 1,
                 cookie: true,  // enable cookies to allow the server to access
                 // the session
-                xfbml: 1,  // parse social plugins on this page
-                version: 'v12.0' // use version 2.1
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.5' // use version 2.1
             });
         };
         // Load the SDK asynchronously
@@ -38,23 +42,27 @@ class LikeAndShare extends Component {
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     }
-
-    componentDidMount() {
-        this.initFacebookSDK();
-    }
-
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.language !== prevProps.language){
-        
+
+        if (prevProps.language !== this.props.language) {
+            // let allDays = this.getArrDays(this.props.language)
+            // this.setState({
+            //     allDays: allDays
+            // })
+        }
+        if (prevProps.doctorId !== this.props.doctorId) {
+
         }
     }
-    
+
     render() {
         let { dataHref } = this.props;
-
         return (
-            <>
-                <div className="fb-share"
+
+
+            <React.Fragment>
+
+                <div class="fb-like"
                     data-href={dataHref}
                     data-width=""
                     data-layout="standard"
@@ -62,7 +70,8 @@ class LikeAndShare extends Component {
                     data-size="small"
                     data-share="true">
                 </div>
-            </>
+
+            </React.Fragment>
         );
     }
 }
@@ -70,6 +79,7 @@ class LikeAndShare extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+
     };
 };
 

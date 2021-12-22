@@ -5,9 +5,23 @@ import logo from '../../assets/logogc-ft.png';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../utils";
 import { withRouter } from 'react-router';
+import * as actions from '../../store/actions';
 import { changeLanguageApp } from "../../store/actions";
+import { getAllSpecialty, getAllClinic, getAllDoctors } from '../../services/userService';
 import { Link } from 'react-router-dom';
 class HomeHeader extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isShowSearch: false,
+            dataSpecialty: {},
+            dataClinics: {},
+            dataDoctors: {},
+            strSearch: '',
+
+        }
+    }
 
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)
@@ -18,12 +32,72 @@ class HomeHeader extends Component {
             this.props.history.push('/home');
         }
     }
+    getAllData = async () => {
+        let res = await getAllSpecialty();
+        let res1 = await getAllClinic();
+        if (res && res.errCode === 0 || res1 && res1.errCode === 0) {
+            this.setState({
+                dataSpecialty: res.data ? res.data : [],
+                dataClinics: res1.data ? res1.data : [],
+                dataDoctors: this.props.topDoctorsRedux,
+                isShowSearch: true
+            })
+        }
 
+    }
+    handleClickSearch = async () => {
+        await this.getAllData();
+    }
+
+    handleUnClickSearch = async () => {
+        this.setState({
+
+            isShowSearch: false
+        })
+    }
+    handleViewDetailSpecialty = (item) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-specialty/${item.id}`)
+        }
+    }
+    handleViewDetailDoctor = (doctor) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-doctor/${doctor.id}`)
+        }
+    }
+    handleViewDetailClinic = (item) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-clinic/${item.id}`)
+        }
+    }
+    handleSearch = async (event) => {
+        await this.getAllData();
+        let { dataSpecialty, dataClinics, dataDoctors } = this.state
+        let strSearch = event.target.value
+        let newFilter = dataSpecialty.filter((item) => {
+            return item.name.toLowerCase().includes(strSearch);
+        });
+        let newFilter2 = dataClinics.filter((item) => {
+            return item.name.toLowerCase().includes(strSearch);
+        });
+
+        let newFilter3 = dataDoctors.filter((item) => {
+            let name = ` ${item.lastName} ${item.firstName}`;
+            return name.toLowerCase().includes(strSearch);
+        });
+
+        this.setState({
+            dataSpecialty: newFilter,
+            dataClinics: newFilter2,
+            dataDoctors: newFilter3,
+        })
+    }
     render() {
+        let { isShowSearch, dataSpecialty, dataClinics, dataDoctors } = this.state;
         let language = this.props.language;
         return (
             <React.Fragment>
-                <div className="home-header-container">
+                <div className="home-header-container" >
                     <div className="home-header-content">
                         <div className="left-content">
                             <i className="fas fa-bars"></i>
@@ -56,14 +130,108 @@ class HomeHeader extends Component {
                     </div>
                 </div>
                 {this.props.isShowBanner === true &&
-                    <div className="home-header-banner">
+                    <div className="home-header-banner" onClick={() => this.handleUnClickSearch()}>
                         <div className="content-up">
                             <div className="title1"><FormattedMessage id="banner.title1" /></div>
                             <div className="title2"><FormattedMessage id="banner.title2" /></div>
-                            <div className="search">
+                            {language === LANGUAGES.VI ? <div className="search">
                                 <i className="fas fa-search"></i>
-                                <input type="text" placeholder="Tìm chuyên khoa khám bệnh" />
+                                <input type="text" onClick={() => this.handleClickSearch()} onChange={(event) => this.handleSearch(event)} placeholder="Tìm kiếm" />
                             </div>
+                                : <div className="search">
+                                    <i className="fas fa-search"></i>
+                                    <input type="text" onClick={() => this.handleClickSearch()} onChange={(event) => this.handleSearch(event)} placeholder="Search" />
+                                </div>}
+
+                            {isShowSearch === true &&
+                                <>
+                                    <div className="data-search">
+                                        <div className="search-specialty">
+                                            <h3>Chuyên khoa</h3>
+                                            {dataSpecialty && dataSpecialty.length > 0 &&
+                                                dataSpecialty.map((item, index) => {
+                                                    return (
+                                                        <>
+                                                            <div className="timkiem-ketqua">
+                                                                <a key={index}
+                                                                    onClick={() => this.handleViewDetailSpecialty(item)} >
+
+                                                                    <div
+                                                                        className="bg-image"
+                                                                        style={{ backgroundImage: `url(${item.image})` }}
+                                                                    >
+                                                                    </div>
+                                                                    <a>{item.name}</a>
+                                                                </a>
+                                                            </div>
+
+                                                        </>
+
+                                                    )
+                                                })
+                                            }
+                                        </div>
+
+                                        <div className="search-specialty">
+                                            <h3>Cơ sở y tế</h3>
+                                            {dataClinics && dataClinics.length > 0 &&
+                                                dataClinics.map((item, index) => {
+                                                    return (
+                                                        <>
+                                                            <div className="timkiem-ketqua">
+                                                                <a key={index}
+                                                                    onClick={() => this.handleViewDetailClinic(item)} >
+
+                                                                    <div
+                                                                        className="bg-image"
+                                                                        style={{ backgroundImage: `url(${item.image})` }}
+                                                                    >
+                                                                    </div>
+                                                                    <a>{item.name}</a>
+                                                                </a>
+                                                            </div>
+
+                                                        </>
+
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        <div className="search-specialty">
+                                            <h3>Bác sỹ</h3>
+                                            {dataDoctors && dataDoctors.length > 0 &&
+                                                dataDoctors.map((item, index) => {
+                                                    let imageBase64 = '';
+                                                    if (item.image) {
+                                                        imageBase64 = Buffer.from(item.image, 'base64').toString('binary');
+                                                    }
+                                                    let nameVI = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`;
+                                                    let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
+                                                    return (
+                                                        <>
+                                                            <div className="timkiem-ketqua">
+                                                                <a key={index}
+                                                                    onClick={() => this.handleViewDetailDoctor(item)} >
+
+                                                                    <div
+                                                                        className="bg-image"
+                                                                        style={{ backgroundImage: `url(${imageBase64})` }}
+                                                                    >
+                                                                    </div>
+                                                                    <a>{language === LANGUAGES.VI ? nameVI : nameEn}</a>
+                                                                </a>
+                                                            </div>
+
+                                                        </>
+
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                </>
+
+                            }
                         </div>
                         <div className="content-down">
                             <div className="options">
@@ -105,12 +273,14 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
         language: state.app.language,
+        topDoctorsRedux: state.admin.topDoctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        loadTopDoctors: () => dispatch(actions.fetchTopDoctor())
     };
 };
 

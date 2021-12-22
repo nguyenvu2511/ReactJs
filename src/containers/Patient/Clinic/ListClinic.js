@@ -25,7 +25,7 @@ class ListClinic extends Component {
         }
     }
 
-    handleViewDetailSpecialty = (item) => {
+    handleViewDetailClinic = (item) => {
         if (this.props.history) {
             this.props.history.push(`/detail-clinic/${item.id}`)
         }
@@ -47,7 +47,7 @@ class ListClinic extends Component {
                                     <>
                                         <ul>
                                             <li key={index}
-                                                onClick={() => this.handleViewDetailSpecialty(item)}>
+                                                onClick={() => this.handleViewDetailClinic(item)}>
 
                                                 <div
                                                     className="bg-image"
