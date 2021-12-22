@@ -70,10 +70,18 @@ class HomeHeader extends Component {
             this.props.history.push(`/detail-clinic/${item.id}`)
         }
     }
-    handleSearch = async (event) => {
+    handleClear = () => {
+        this.setState({
+            strSearch: ''
+        })
+    }
+    handleOnchangeSearch = async (event) => {
+        this.setState({
+            strSearch: event.target.value
+        })
         await this.getAllData();
-        let { dataSpecialty, dataClinics, dataDoctors } = this.state
-        let strSearch = event.target.value
+        let { dataSpecialty, dataClinics, dataDoctors, strSearch } = this.state
+
         let newFilter = dataSpecialty.filter((item) => {
             return item.name.toLowerCase().includes(strSearch);
         });
@@ -92,6 +100,7 @@ class HomeHeader extends Component {
             dataDoctors: newFilter3,
         })
     }
+
     render() {
         let { isShowSearch, dataSpecialty, dataClinics, dataDoctors } = this.state;
         let language = this.props.language;
@@ -136,11 +145,13 @@ class HomeHeader extends Component {
                             <div className="title2"><FormattedMessage id="banner.title2" /></div>
                             {language === LANGUAGES.VI ? <div className="search">
                                 <i className="fas fa-search"></i>
-                                <input type="text" onClick={() => this.handleClickSearch()} onChange={(event) => this.handleSearch(event)} placeholder="Tìm kiếm" />
+                                <input type="text" value={this.state.strSearch} onClick={() => this.handleClickSearch()} onChange={(event) => this.handleOnchangeSearch(event)} placeholder="Tìm kiếm" />
+                                {isShowSearch === true && <i className="far fa-times-circle" onClick={() => this.handleClear()}></i>}
                             </div>
                                 : <div className="search">
                                     <i className="fas fa-search"></i>
-                                    <input type="text" onClick={() => this.handleClickSearch()} onChange={(event) => this.handleSearch(event)} placeholder="Search" />
+                                    <input type="text" value={this.state.strSearch} onClick={() => this.handleClickSearch()} onChange={(event) => this.handleOnchangeSearch(event)} placeholder="Search" />
+                                    {isShowSearch === true && <i className="far fa-times-circle" onClick={() => this.handleClear()}></i>}
                                 </div>}
 
                             {isShowSearch === true &&
