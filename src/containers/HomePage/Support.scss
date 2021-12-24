@@ -3,7 +3,7 @@
     .support-body {
 
         margin-top   : 50px;
-        margin-bottom: 50px;
+        margin-bottom: 80px;
 
         .info {
             li {
@@ -15,11 +15,16 @@
             }
         }
 
-        .map {
-            width : 400px;
-            height: 300px;
-            border: none;
+        .gg-map {
+            margin-top: -290px;
+
+            .map {
+                width : 400px;
+                height: 300px;
+                border: none;
+            }
         }
+
 
     }
 }

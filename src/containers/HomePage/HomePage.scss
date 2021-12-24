@@ -205,4 +205,19 @@
             }
         }
     }
+
+
+}
+
+.btn-booking {
+    height       : 60px;
+    width        : 60px;
+    border-radius: 50%;
+    position     : sticky;
+    top          : 600px;
+    margin-left  : 1410px;
+    border       : none;
+    box-shadow   : 0 1px 6px #20212447;
+    background   : #f7d800;
+    z-index      : 1000000;
 }

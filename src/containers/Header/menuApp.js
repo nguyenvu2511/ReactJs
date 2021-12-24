@@ -8,10 +8,6 @@ export const adminMenu = [
 
             {
                 name: 'menu.admin.manage-doctor', link: '/system/manage-doctor'
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
-                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
-                // ]
             },
 
             // {
@@ -20,6 +16,10 @@ export const adminMenu = [
 
             { //quản lý lịch khám
                 name: 'menu.doctor.manage-schedule', link: '/system/manage-schedule'
+            },
+
+            { //quản lý lịch khám
+                name: 'Quản lý bệnh nhân', link: '/system/manage-patient'
             },
         ]
     },
@@ -53,6 +53,9 @@ export const doctorMenu = [
     {
         name: 'menu.admin.manage-user',
         menus: [
+            {
+                name: 'menu.admin.manage-doctor', link: '/doctor/manage-info'
+            },
             { //quản lý lịch khám
                 name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
             },

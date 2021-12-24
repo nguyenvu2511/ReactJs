@@ -24,6 +24,7 @@ import ListClinic from './Patient/Clinic/ListClinic';
 import ListDoctor from './Patient/Doctor/ListDoctor';
 import ListHanbook from './Patient/Handbook/ListHanbook';
 import Support from './HomePage/Support';
+import BookingNow from './Patient/Doctor/BookingNow';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -69,6 +70,7 @@ class App extends Component {
                                     <Route path={path.LIST_DOCTOR} component={ListDoctor} />
                                     <Route path={path.LIST_HANDBOOK} component={ListHanbook} />
                                     <Route path={path.SUPPORT} component={Support} />
+                                    <Route path={path.BOOKING_NOW} component={BookingNow} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

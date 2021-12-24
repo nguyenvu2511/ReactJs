@@ -308,6 +308,7 @@ class UserRedux extends Component {
 
 
                         </div>
+
                         <div className="mb-5">
                             <TableManageUser
                                 handleEditUserFromParent={this.handleEditUserFromParent}

@@ -15,6 +15,7 @@ class ListDoctor extends Component {
         super(props);
         this.state = {
             arrDoctors: [],
+            strSearch: '',
         }
     }
 
@@ -28,6 +29,7 @@ class ListDoctor extends Component {
 
     async componentDidMount() {
         this.props.loadTopDoctors();
+
     }
 
     handleViewDetailDoctor = (doctor) => {
@@ -35,7 +37,24 @@ class ListDoctor extends Component {
             this.props.history.push(`/detail-doctor/${doctor.id}`)
         }
     }
+    handleOnchangeSearch = async (event) => {
+        await this.setState({
+            strSearch: event.target.value,
+            arrDoctors: this.props.topDoctorsRedux,
+        })
 
+        let { arrDoctors, strSearch } = this.state;
+        let newFilter = arrDoctors.filter((item) => {
+            let name = ` ${item.lastName} ${item.firstName}`;
+            return name.toLowerCase().includes(strSearch);
+        });
+
+
+        this.setState({
+            arrDoctors: newFilter,
+
+        })
+    }
     render() {
         let { arrDoctors } = this.state;
         let { language } = this.props;
@@ -45,8 +64,18 @@ class ListDoctor extends Component {
                 <HomeHeader />
                 <div className="list-doctor-container">
                     <div className="title-doctor">
-                        <h5><FormattedMessage id="patient.list.list-doctor" /></h5>
+                        <a><FormattedMessage id="patient.list.list-doctor" /></a>
+
                     </div>
+                    {language === LANGUAGES.VI ?
+                        <div className="search-doctor">
+                            <i class="fas fa-search"></i><input type="search" value={this.state.strSearch} onChange={(event) => this.handleOnchangeSearch(event)} placeholder="Tìm kiếm bác sĩ"></input>
+                        </div> :
+                        <div className="search-doctor">
+                            <i class="fas fa-search"></i><input type="search" value={this.state.strSearch} onChange={(event) => this.handleOnchangeSearch(event)} placeholder="Search doctor"></input>
+                        </div>
+                    }
+
                     <div className="all-doctor">
                         {arrDoctors && arrDoctors.length > 0
                             && arrDoctors.map((item, index) => {

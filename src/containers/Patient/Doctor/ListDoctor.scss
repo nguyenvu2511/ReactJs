@@ -1,5 +1,6 @@
 .list-doctor-container {
-    padding: 30px 150px;
+    padding   : 30px 150px;
+    background: #eee;
 
     .title-doctor {
         line-height  : 50px;
@@ -8,6 +9,35 @@
         white-space  : nowrap;
         overflow     : hidden;
         padding-right: 15 px;
+        display      : block;
+
+        a {
+            font-size     : 18px;
+            font-weight   : 600;
+            text-transform: uppercase;
+        }
+
+
+
+    }
+
+    .search-doctor {
+        width        : fit-content;
+        background   : #fff;
+        border-radius: 5px;
+        border       : 1px solid #ddd;
+
+        i {
+            color       : #666;
+            padding-left: 2px;
+        }
+
+        input {
+            padding   : 0 8px;
+            background: transparent;
+            border    : none;
+            outline   : none;
+        }
     }
 
     .all-doctor {
@@ -20,6 +50,10 @@
             margin-inline-start : 0px;
             margin-inline-end   : 0px;
             padding-inline-start: 40px;
+
+            background-color: #fff;
+            box-shadow      : 0 1px 6px #20212447;
+            border-radius   : 10 px;
         }
 
         ul li {

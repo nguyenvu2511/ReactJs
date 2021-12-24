@@ -11,7 +11,8 @@ class TableUseManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrUsers: []
+            arrUsers: [],
+            strSearch: '',
 
         }
     }
@@ -35,49 +36,77 @@ class TableUseManage extends Component {
     handleEditUser = (user) => {
         this.props.handleEditUserFromParent(user)
     }
+    handleOnchangeSearch = async (event) => {
+        await this.setState({
+            strSearch: event.target.value,
+            arrUsers: this.props.listUsers,
+
+        })
+
+        let { arrUsers, strSearch } = this.state;
+        let newFilter = arrUsers.filter((item) => {
+            let data = ` ${item.lastName} ${item.firstName}${item.email}${item.phonenumber}`;
+            return data.toLowerCase().includes(strSearch);
+        });
+
+
+        this.setState({
+            arrUsers: newFilter,
+
+        })
+    }
     render() {
         let arrUsers = this.state.arrUsers;
         console.log()
         let { language } = this.props
         return (
+            <>
+                {language === LANGUAGES.VI ?
+                    <div className="search-doctor">
+                        <i class="fas fa-search"></i><input type="search" value={this.state.strSearch} onChange={(event) => this.handleOnchangeSearch(event)} placeholder="Tìm kiếm"></input>
+                    </div> :
+                    <div className="search-doctor">
+                        <i class="fas fa-search"></i><input type="search" value={this.state.strSearch} onChange={(event) => this.handleOnchangeSearch(event)} placeholder="Search"></input>
+                    </div>
+                }
+                <table id="TableUseManage">
+                    <tbody>
+                        <tr>
+                            <th><FormattedMessage id="manage-user.email" /></th>
+                            {language === LANGUAGES.VI ? <th><FormattedMessage id="manage-user.last-name" /></th> : <th><FormattedMessage id="manage-user.first-name" /></th>}
+                            {language === LANGUAGES.VI ? <th><FormattedMessage id="manage-user.first-name" /></th> : <th><FormattedMessage id="manage-user.last-name" /></th>}
 
-            <table id="TableUseManage">
-                <tbody>
-                    <tr>
-                        <th><FormattedMessage id="manage-user.email" /></th>
-                        {language === LANGUAGES.VI ? <th><FormattedMessage id="manage-user.last-name" /></th> : <th><FormattedMessage id="manage-user.first-name" /></th>}
-                        {language === LANGUAGES.VI ? <th><FormattedMessage id="manage-user.first-name" /></th> : <th><FormattedMessage id="manage-user.last-name" /></th>}
+                            <th><FormattedMessage id="manage-user.gender" /></th>
+                            <th><FormattedMessage id="manage-user.phone" /></th>
+                            <th><FormattedMessage id="manage-user.address" /></th>
+                            <th><FormattedMessage id="manage-user.role" /></th>
+                            <th><FormattedMessage id="manage-user.img" /></th>
+                            <th><FormattedMessage id="manage-user.action" /></th>
 
-                        <th><FormattedMessage id="manage-user.gender" /></th>
-                        <th><FormattedMessage id="manage-user.phone" /></th>
-                        <th><FormattedMessage id="manage-user.address" /></th>
-                        <th><FormattedMessage id="manage-user.role" /></th>
-                        <th><FormattedMessage id="manage-user.img" /></th>
-                        <th><FormattedMessage id="manage-user.action" /></th>
+                        </tr>
+                        {arrUsers && arrUsers.length > 0}
+                        {arrUsers.map((item, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{item.email}</td>
+                                    {language === LANGUAGES.VI ? <td>{item.lastName}</td> : <td>{item.firstName}</td>}
+                                    {language === LANGUAGES.VI ? <td>{item.firstName}</td> : <td>{item.lastName}</td>}
+                                    <td>{language === LANGUAGES.VI ? item.genderData.valueVi : item.genderData.valueEn}</td>
+                                    <td>{item.phonenumber}</td>
+                                    <td>{item.address}</td>
+                                    <td>{language === LANGUAGES.VI ? item.roleData.valueVi : item.roleData.valueEn}</td>
+                                    <td className={"img"} style={{ backgroundImage: `url(${item.image ? Buffer.from(item.image, 'base_64').toString('binary') : ''})` }}></td>
+                                    <td>  <button className="btn-edit" onClick={() => { this.handleEditUser(item) }}><i className="fas fa-edit"></i></button>
+                                        <button className="btn-delete" onClick={() => { this.handleDeleteUser(item) }}><i className="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            )
+                        })
 
-                    </tr>
-                    {arrUsers && arrUsers.length > 0}
-                    {arrUsers.map((item, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{item.email}</td>
-                                {language === LANGUAGES.VI ? <td>{item.lastName}</td> : <td>{item.firstName}</td>}
-                                {language === LANGUAGES.VI ? <td>{item.firstName}</td> : <td>{item.lastName}</td>}
-                                <td>{language === LANGUAGES.VI ? item.genderData.valueVi : item.genderData.valueEn}</td>
-                                <td>{item.phonenumber}</td>
-                                <td>{item.address}</td>
-                                <td>{language === LANGUAGES.VI ? item.roleData.valueVi : item.roleData.valueEn}</td>
-                                <td className={"img"} style={{ backgroundImage: `url(${item.image ? Buffer.from(item.image, 'base_64').toString('binary') : ''})` }}></td>
-                                <td>  <button className="btn-edit" onClick={() => { this.handleEditUser(item) }}><i className="fas fa-edit"></i></button>
-                                    <button className="btn-delete" onClick={() => { this.handleDeleteUser(item) }}><i className="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                        )
-                    })
-
-                    }
-                </tbody>
-            </table>
+                        }
+                    </tbody>
+                </table>
+            </>
 
         );
     }

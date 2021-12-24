@@ -77,8 +77,8 @@ class Support extends Component {
 
 
                         </div>
-                        <div className="fb-page col-6" data-href="https://www.facebook.com/profile.php?id=100075489367618" data-tabs="timeline" data-width="400" data-height="70" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=100075489367618" className="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=100075489367618">GoodCare</a></blockquote></div>
-                        <div className="col-6">
+                        <div className="fb-page col-6" data-href="https://www.facebook.com/profile.php?id=100075489367618" data-tabs="timeline" data-width="400" data-height="" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=100075489367618" className="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=100075489367618">GoodCare</a></blockquote></div>
+                        <div className="col-6 gg-map" >
                             <iframe className="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1251208107665!2d106.71229765031123!3d10.801727892266626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a459cb43ab%3A0x6c3d29d370b52a7e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVFAuSENNIC0gSFVURUNI!5e0!3m2!1svi!2s!4v1639751510403!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>

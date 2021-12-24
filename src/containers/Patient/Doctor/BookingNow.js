@@ -1,41 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import './DoctorSchedule.scss';
+import './BookingNow.scss';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
 import { LANGUAGES } from '../../../utils';
-import { getScheduleDoctorByDate } from '../../../services/userService';
+import { getAllCodeService } from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
-import BookingModal from './Modal/BookingModal';
+import BookingNowModal from './Modal/BookingNowModal';
+import HomeHeader from '../../HomePage/HomeHeader';
+import HomeFooter from '../../HomePage/HomeFooter';
 
-class DoctorSchedule extends Component {
+class BookingNow extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             allDays: [],
             allVailableTime: [],
+            date: '',
             isOpenModalBooking: false,
             dataScheduleTimeModal: {},
         }
     }
 
     async componentDidMount() {
-        if (this.props.doctorIdFromParent) {
-            let { language } = this.props;
-            let allDays = this.getArrDays(language);
-            this.setState({
-                allDays: allDays,
-            })
+        let { language } = this.props;
+        let allDays = this.getArrDays(language);
+        let res = await getAllCodeService("TIME");
+        this.setState({
+            allDays: allDays,
+            date: allDays[0].value,
+            allVailableTime: res.data
 
-            if (this.props.doctorIdFromParent) {
-                let res = await getScheduleDoctorByDate(this.props.doctorIdFromParent, allDays[0].value);
-                this.setState({
-                    allVailableTime: res.data ? res.data : []
-                })
-            }
+        })
 
-        }
+
     }
 
     capitalizeFirstLetter(string) {
@@ -79,29 +78,16 @@ class DoctorSchedule extends Component {
                 allDays: allDays
             })
         }
-        if (this.props.doctorIdFromParent !== prevProps.doctorIdFromParent) {
-            let allDays = this.getArrDays(this.props.language);
-            let res = await getScheduleDoctorByDate(this.props.doctorIdFromParent, allDays[0].value);
-            this.setState({
-                allVailableTime: res.data ? res.data : []
-            })
-        }
-    }
 
+    }
     handleOnChangeSelect = async (event) => {
-        if (this.props.doctorIdFromParent && this.props.doctorIdFromParent !== -1) {
-            let doctorId = this.props.doctorIdFromParent;
-            let date = event.target.value;
-            let res = await getScheduleDoctorByDate(doctorId, date);
-
-            if (res && res.errCode === 0) {
-                this.setState({
-                    allVailableTime: res.data ? res.data : [],
-                })
-            }
-        }
+        let date = event.target.value;
+        let res = await getAllCodeService("TIME");
+        this.setState({
+            allVailableTime: res.data,
+            date: date
+        })
     }
-
     handleClickScheduleTime = (time) => {
         this.setState({
             isOpenModalBooking: true,
@@ -116,11 +102,14 @@ class DoctorSchedule extends Component {
     }
 
     render() {
-        let { allDays, allVailableTime, isOpenModalBooking, dataScheduleTimeModal } = this.state;
+        let { allDays, allVailableTime, isOpenModalBooking, dataScheduleTimeModal, date } = this.state;
         let { language } = this.props;
+        console.log('allVailableTime', allVailableTime, dataScheduleTimeModal)
         return (
             <>
-                <div className="doctor-schedule-container">
+                <HomeHeader />
+                <div className="booking-container">
+                    <div className='title2'>ĐẶT LỊCH NGAY</div>
                     <div className="all-schedule">
                         <select onChange={(event) => this.handleOnChangeSelect(event)}>
                             {allDays && allDays.length > 0 && allDays.map((item, index) => {
@@ -147,7 +136,7 @@ class DoctorSchedule extends Component {
                                     <div className="time-content-btns">
                                         {allVailableTime.map((item, index) => {
                                             let timeDisplay = language === LANGUAGES.VI ?
-                                                item.timeTypeData.valueVi : item.timeTypeData.valueEn;
+                                                item.valueVi : item.valueEn;
                                             return (
                                                 <button
                                                     key={index}
@@ -177,11 +166,13 @@ class DoctorSchedule extends Component {
                         </div>
                     </div>
                 </div>
-                <BookingModal
+                <BookingNowModal
                     isOpenModal={isOpenModalBooking}
                     closeModal={this.closeBookingModal}
                     dataScheduleTime={dataScheduleTimeModal}
+                    date={date}
                 />
+                <HomeFooter />
             </>
         );
     }
@@ -190,12 +181,14 @@ class DoctorSchedule extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorSchedule);
+export default connect(mapStateToProps, mapDispatchToProps)(BookingNow);

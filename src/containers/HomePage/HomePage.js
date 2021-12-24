@@ -10,6 +10,7 @@ import HomeFooter from './HomeFooter';
 import './HomePage.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
     // handleAfterChange = (index, dontAnimate) => {
@@ -24,10 +25,12 @@ class HomePage extends Component {
             slidesToScroll: 2,
             // slickGoTo: this.handleAfterChange
         };
-        
+
         return (
+
             <div>
                 <HomeHeader isShowBanner={true} />
+                <Link to={`/booking-now`}> <button className='btn-booking'>Đặt lịch ngay</button></Link>
                 <Specialty settings={settings} />
                 <MedicalFacility settings={settings} />
                 <OutStandingDoctor settings={settings} />

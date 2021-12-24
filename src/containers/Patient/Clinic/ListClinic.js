@@ -25,7 +25,7 @@ class ListClinic extends Component {
         }
     }
 
-    handleViewDetailClinic = (item) => {
+    handleViewDetailSpecialty = (item) => {
         if (this.props.history) {
             this.props.history.push(`/detail-clinic/${item.id}`)
         }
@@ -38,7 +38,7 @@ class ListClinic extends Component {
                 <HomeHeader />
                 <div className="list-clinic-container">
                     <div className="title-clinic">
-                        <h5> <h5><FormattedMessage id="patient.list.list-clinic" /></h5></h5>
+                        <a><FormattedMessage id="patient.list.list-clinic" /></a>
                     </div>
                     <div className="all-clinic">
                         {dataClinics && dataClinics.length > 0 &&
@@ -47,7 +47,7 @@ class ListClinic extends Component {
                                     <>
                                         <ul>
                                             <li key={index}
-                                                onClick={() => this.handleViewDetailClinic(item)}>
+                                                onClick={() => this.handleViewDetailSpecialty(item)}>
 
                                                 <div
                                                     className="bg-image"

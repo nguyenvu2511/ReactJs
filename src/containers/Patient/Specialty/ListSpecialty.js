@@ -38,7 +38,7 @@ class ListSpecialty extends Component {
                 <HomeHeader />
                 <div className="list-specialty-container">
                     <div className="title-specialty">
-                        <h5><FormattedMessage id="patient.list.list-specialty" /></h5>
+                        <a><FormattedMessage id="patient.list.list-specialty" /></a>
                     </div>
                     <div className="all-specialty">
                         {dataSpecialty && dataSpecialty.length > 0 &&

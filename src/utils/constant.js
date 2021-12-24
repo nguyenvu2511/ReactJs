@@ -13,7 +13,8 @@ export const path = {
     LIST_CLINIC: '/list-clinic',
     LIST_DOCTOR: '/list-doctor',
     LIST_HANDBOOK: '/list-handbook',
-    SUPPORT: '/support'
+    SUPPORT: '/support',
+    BOOKING_NOW: '/booking-now'
 };
 
 export const LANGUAGES = {

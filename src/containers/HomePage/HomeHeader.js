@@ -284,7 +284,7 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
         language: state.app.language,
-        topDoctorsRedux: state.admin.topDoctors
+        topDoctorsRedux: state.admin.topDoctors,
     };
 };
 

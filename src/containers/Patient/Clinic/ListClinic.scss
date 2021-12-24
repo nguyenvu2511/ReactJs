@@ -7,7 +7,13 @@
         text-overflow: ellipsis;
         white-space  : nowrap;
         overflow     : hidden;
-        padding-right: 15 px;
+        padding-right: 30 px;
+
+        a {
+            font-size     : 18px;
+            font-weight   : 600;
+            text-transform: uppercase;
+        }
     }
 
     .all-clinic {
@@ -28,6 +34,8 @@
             padding      : 15 px;
             border-bottom: 1 px solid #eee;
             position     : relative;
+
+
         }
 
         h3 {

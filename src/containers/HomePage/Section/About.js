@@ -15,7 +15,7 @@ class About extends Component {
 
     async componentDidMount() {
         let res = await getDataCovid();
-        if(res && res.length > 0){
+        if (res && res.length > 0) {
             res.map(item => {
                 item.Date = moment(item.Date).format('DD/MM/YYYY');
                 return item;
@@ -25,41 +25,42 @@ class About extends Component {
             dataCovid: res
         })
     }
-    
+
     render() {
         let { dataCovid } = this.state;
+        console.log('dataCovid', dataCovid)
         return (
             <div className="section-share section-about">
                 <div className="section-about-header">
                     <FormattedMessage id="homepage.datacovid" />
                 </div>
                 <div className="section-about-body">
-                <table>
-                    <thead>
-                        <tr>
-                            <th><FormattedMessage id="homepage.day" /></th>
-                            <th><FormattedMessage id="homepage.confirm" /></th>
-                            <th><FormattedMessage id="homepage.active" /></th>
-                            <th><FormattedMessage id="homepage.death" /></th>
-                            <th><FormattedMessage id="homepage.recover" /></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dataCovid && dataCovid.length > 0 &&
-                            dataCovid.map(item => {
-                                return (
-                                    <tr key={item.ID}>
-                                        <td>{item.Date}</td>
-                                        <td>{item.Confirmed}</td>
-                                        <td>{item.Active}</td>
-                                        <td>{item.Deaths}</td>
-                                        <td>{item.Recovered}</td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><FormattedMessage id="homepage.day" /></th>
+                                <th><FormattedMessage id="homepage.confirm" /></th>
+                                <th><FormattedMessage id="homepage.active" /></th>
+                                <th><FormattedMessage id="homepage.death" /></th>
+                                <th><FormattedMessage id="homepage.recover" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataCovid && dataCovid.length > 0 &&
+                                dataCovid.map(item => {
+                                    return (
+                                        <tr key={item.ID}>
+                                            <td>{item.Date}</td>
+                                            <td>{item.Confirmed}</td>
+                                            <td>{item.Active}</td>
+                                            <td>{item.Deaths}</td>
+                                            <td>{item.Recovered}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
                 </div>
                 {/* <div className="section-about-content">
                     <div className="content-left">
